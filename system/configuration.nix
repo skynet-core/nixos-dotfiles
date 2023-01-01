@@ -29,7 +29,9 @@
     LC_TELEPHONE = "uk_UA.UTF-8";
     LC_TIME = "uk_UA.UTF-8";
   };
-
+  environment.etc = {
+    "profile.d/vte.sh".source = "${pkgs.termite.vte-ng}/etc/profile.d/vte.sh";
+  };
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;

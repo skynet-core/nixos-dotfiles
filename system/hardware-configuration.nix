@@ -38,4 +38,13 @@
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   # high-resolution display
   hardware.video.hidpi.enable = lib.mkDefault true;
+  hardware.opengl.extraPackages = [
+    pkgs.amdvlk
+    pkgs.rocm-opencl-icd
+  ];
+  hardware.opengl.extraPackages32 = [
+    pkgs.driversi686Linux.amdvlk
+  ];
+  environment.variables.AMD_VULKAN_ICD = "RADV";
+  environment.variables.VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
 }

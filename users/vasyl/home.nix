@@ -16,6 +16,8 @@
     rnix-lsp
     spacevim
     vscode-fhs
+    tilix
+    (pkgs.nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "UbuntuMono" ]; })
   ];
   programs.autojump.enable = true;
   programs.bash = {
