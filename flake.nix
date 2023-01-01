@@ -7,8 +7,7 @@
     home-manager.url = "github:nix-community/home-manager/release-22.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
-
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }: 
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }@attrs:
   let
     system = "x86_64-linux";
     pkgs = import nixpkgs {
@@ -22,19 +21,25 @@
           inherit system;
           config.allowUnfree = true;
         };
-    };
+      };
+    alacrittyConfig = import ./users/vasyl/alacritty.nix {};
   in {
     homeManagerConfigurations = {
       vasyl = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
-          ./users/vasyl/home.nix
+          (import ./users/vasyl/home.nix { 
+            inherit attrs; 
+            pkgs = pkgs;
+            alacrittyConfig = alacrittyConfig;
+          })
         ];
       };
     };
     nixosConfigurations = {
       flowx13 = lib.nixosSystem {
         inherit system;
+        specialArgs = attrs;
         modules = [
           ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
           ./system/configuration.nix
