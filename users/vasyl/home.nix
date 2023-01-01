@@ -13,6 +13,13 @@
     alacritty
     spacevim
   ];
+  programs.gpg.enable = true;
+  services.gpg-agent = {
+    enable = true;
+    enableSshSupport = true;
+    pinentryFlavor = "gnome3";
+  };
+  nixpkgs.config.allowUnfree = true;
   programs.home-manager.enable = true;
   home.file = {
     ".config/alacritty/alacritty.yml".text = ''
@@ -24,6 +31,9 @@
           blinking: Always
       font:
         size: 14.0
+      slection:
+        semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+        save_to_clipboard: true
     '';
   };
 }
