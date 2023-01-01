@@ -56,16 +56,18 @@
 
   users.users.vasyl = {
     isNormalUser = true;
+    shell = pkgs.zsh;
     description = "Vasyl Zaichenko";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
   };
 
   environment.systemPackages = with pkgs; [
     vim
   ];
+  virtualisation.docker.enable = true;
   programs.mtr.enable = true;
   # services.openssh.enable = true;
-
+  services.flatpak.enable = true;
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   networking.firewall.enable = true;

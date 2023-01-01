@@ -31,6 +31,7 @@
           (import ./users/vasyl/home.nix { 
             inherit attrs; 
             pkgs = pkgs;
+            nixpkgs-unstable = nixpkgs-unstable;
             alacrittyConfig = alacrittyConfig;
           })
         ];
