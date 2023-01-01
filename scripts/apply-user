@@ -1,2 +1,8 @@
 #/bin/sh
-home-manager switch -f $HOME/.dotfiles/users/$USER/home.nix
+pushd ~/.dotfiles
+
+nix build .#homeManagerConfigurations.$USER.activationPackage
+
+./result/activate
+
+popd 

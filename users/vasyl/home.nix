@@ -11,6 +11,7 @@
     gnupg
     htop
     alacritty
+    vim
     spacevim
   ];
   programs.gpg.enable = true;
